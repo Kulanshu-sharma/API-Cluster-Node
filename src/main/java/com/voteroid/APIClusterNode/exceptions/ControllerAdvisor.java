@@ -36,4 +36,19 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 		ExceptionFieldsDTO body = new ExceptionFieldsDTO(LocalDateTime.now(),Messages.Exceptions.NO_API_URI_RECIEVED);
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
 	}
+	@ExceptionHandler(MethodChangeNotAllowed.class)
+	public ResponseEntity<Object> handleNoAPIURIFound(MethodChangeNotAllowed ex) {
+		ExceptionFieldsDTO body = new ExceptionFieldsDTO(LocalDateTime.now(),Messages.Exceptions.METHOD_CHANGE_NOT_ALLOWED);
+        return new ResponseEntity<>(body, HttpStatus.NOT_MODIFIED);
+	}
+	@ExceptionHandler(PathChangeNotAllowed.class)
+	public ResponseEntity<Object> handleNoAPIURIFound(PathChangeNotAllowed ex) {
+		ExceptionFieldsDTO body = new ExceptionFieldsDTO(LocalDateTime.now(),Messages.Exceptions.PATH_CHANGE_NOT_ALLOWED);
+        return new ResponseEntity<>(body, HttpStatus.NOT_MODIFIED);
+	}
+	@ExceptionHandler(URIChangeNotAllowed.class)
+	public ResponseEntity<Object> handleNoAPIURIFound(URIChangeNotAllowed ex) {
+		ExceptionFieldsDTO body = new ExceptionFieldsDTO(LocalDateTime.now(),Messages.Exceptions.URI_CHANGE_NOT_ALLOWED);
+        return new ResponseEntity<>(body, HttpStatus.NOT_MODIFIED);
+	}
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,10 +17,13 @@ import com.voteroid.APIClusterNode.dtos.GeneralOperations;
 import com.voteroid.APIClusterNode.dtos.Messages;
 import com.voteroid.APIClusterNode.dtos.Reply;
 import com.voteroid.APIClusterNode.entities.APIClusterTbl;
+import com.voteroid.APIClusterNode.exceptions.MethodChangeNotAllowed;
 import com.voteroid.APIClusterNode.exceptions.NoAPIFound;
 import com.voteroid.APIClusterNode.exceptions.NoAPIIDRecieved;
 import com.voteroid.APIClusterNode.exceptions.NoAPIMethodNameRecieved;
 import com.voteroid.APIClusterNode.exceptions.NoAPIUriPresent;
+import com.voteroid.APIClusterNode.exceptions.PathChangeNotAllowed;
+import com.voteroid.APIClusterNode.exceptions.URIChangeNotAllowed;
 import com.voteroid.APIClusterNode.repositories.APIClusterTblRepository;
 import com.voteroid.APIClusterNode.repositories.ClientServiceProxy;
 import com.voteroid.APIClusterNode.repositories.SAGProxy;
@@ -67,7 +71,7 @@ public class APIClusterController {
 	}
 	
 	@GetMapping("/apiCluster/findApiDetails/{apiId}")
-	public Reply fetchAPIDetails(@RequestHeader("userData") String data,@PathVariable int apiId) {
+	public Reply fetchAPIDetails(@RequestHeader("userData") String data,@PathVariable("apiId") int apiId) {
 		Reply reply = new Reply(data);
 		if(apiId==0)
 			throw new NoAPIIDRecieved();
@@ -84,6 +88,35 @@ public class APIClusterController {
 		int clientId = Integer.parseInt(reply.getAttribute(Constants.CLIENT_ID)+"");
 		List<APIClusterTbl> apiClusterTbls = sagProxy.fetchApiListFromClientId("hwhps1427k",clientId);
 		reply.setData(apiClusterTbls);
+		return reply;
+	}
+	
+	@PutMapping("/apiCluster/editApi/{apiId}")
+	public Reply editAPIDetails(@RequestHeader("userData") String data,@RequestBody APIClusterTbl clusterTbl
+																	  ,@PathVariable("apiId") int apiId) {
+		Reply reply = new Reply(data);
+		if(apiId==0)
+			throw new NoAPIIDRecieved();
+		Optional<APIClusterTbl> apiClusterTbl = repository.findById(apiId);
+		if(!apiClusterTbl.isPresent())
+			throw new NoAPIFound();
+		APIClusterTbl act = apiClusterTbl.get();
+		if(!act.getMethodName().equals(clusterTbl.getMethodName()))
+			throw new MethodChangeNotAllowed();
+		if(!act.getPath().equals(clusterTbl.getPath()))
+			throw new PathChangeNotAllowed();
+		if(!act.getApiURL().equals(clusterTbl.getApiURL()))
+			throw new URIChangeNotAllowed();
+		act.setDescription(clusterTbl.getDescription());
+		act.setPathVariables(clusterTbl.getPathVariables());
+		act.setQueryParams(clusterTbl.getQueryParams());
+		act.setReq_headers(clusterTbl.getReq_headers());
+		act.setRequestBody(clusterTbl.getRequestBody());
+		act.setResponseBody(clusterTbl.getResponseBody());
+		act.setRes_headers(clusterTbl.getRes_headers());
+		repository.save(act);
+		reply.setData(Messages.Responses.API_UPDATED_SUCCESSFULLY);
+		//Notify all users by email id...
 		return reply;
 	}
 }
