@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cascade;
 
@@ -57,7 +58,20 @@ public class APIClusterTbl implements Serializable {
 	@Lob
 	@Column(name="RESPONSE_BODY")
 	private String responseBody;
+	
+	@Lob
+	@Column(name="DESCRIPTION")
+	private String description;
+	
+	@Transient
+	private String apiCall;
+	
+	@Transient
+	private String apiURL;
 
+	@Transient
+	private float rate;
+	
 	public int getApiId() {
 		return apiId;
 	}
@@ -129,6 +143,40 @@ public class APIClusterTbl implements Serializable {
 	public void setResponseBody(String responseBody) {
 		this.responseBody = responseBody;
 	}
+
+	public String getApiCall() {
+		return apiCall;
+	}
+
+	public void setApiCall(String apiCall) {
+		this.apiCall = apiCall;
+	}
+
+	public String getApiURL() {
+		return apiURL;
+	}
+
+	public void setApiURL(String apiURL) {
+		this.apiURL = apiURL;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public float getRate() {
+		return rate;
+	}
+
+	public void setRate(float rate) {
+		this.rate = rate;
+	}
+	
+	
 	
 	
 }
