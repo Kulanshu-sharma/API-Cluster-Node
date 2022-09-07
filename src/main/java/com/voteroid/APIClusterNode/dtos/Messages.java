@@ -9,7 +9,8 @@ public interface Messages {
 		public static final String NO_API_URI_RECIEVED = "No API URI Recieved!!!";
 		public static final String METHOD_CHANGE_NOT_ALLOWED = "Method Name Change is Not Allowed !!";
 		public static final String PATH_CHANGE_NOT_ALLOWED = "Path Change is Not Allowed !!";
-		public static final String URI_CHANGE_NOT_ALLOWED = "URI Change is Not Allowed !!";;
+		public static final String URI_CHANGE_NOT_ALLOWED = "URI Change is Not Allowed !!";
+		public static final String AUTHENTICATION_FAILED = "Authentication Failed";
 	}
 	
 	interface Responses{

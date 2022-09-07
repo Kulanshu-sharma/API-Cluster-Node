@@ -51,4 +51,19 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 		ExceptionFieldsDTO body = new ExceptionFieldsDTO(LocalDateTime.now(),Messages.Exceptions.URI_CHANGE_NOT_ALLOWED);
         return new ResponseEntity<>(body, HttpStatus.NOT_MODIFIED);
 	}
+	@ExceptionHandler(DataNotRecieved.class)
+	public ResponseEntity<Object> handleNoAPIURIFound(DataNotRecieved ex) {
+		ExceptionFieldsDTO body = new ExceptionFieldsDTO(LocalDateTime.now(),ex.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+	}
+	@ExceptionHandler(SomethingWentWrong.class)
+	public ResponseEntity<Object> handleNoAPIURIFound(SomethingWentWrong ex) {
+		ExceptionFieldsDTO body = new ExceptionFieldsDTO(LocalDateTime.now(),ex.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	@ExceptionHandler(UserAuthenticationFailed.class)
+	public ResponseEntity<Object> handleNoAPIMethodNameRecieved(UserAuthenticationFailed ex) {
+		ExceptionFieldsDTO body = new ExceptionFieldsDTO(LocalDateTime.now(),Messages.Exceptions.AUTHENTICATION_FAILED);
+        return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
+	}
 }

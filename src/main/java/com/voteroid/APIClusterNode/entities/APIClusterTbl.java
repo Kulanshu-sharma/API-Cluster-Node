@@ -2,8 +2,6 @@ package com.voteroid.APIClusterNode.entities;
 
 import java.io.Serializable;
 import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -31,22 +29,22 @@ public class APIClusterTbl implements Serializable {
 	@Column(name="PATH")
 	private String path;
 	
-	@OneToMany
+	@OneToMany(mappedBy="apiId")
 	@Column(name="HEADERS_Tbl")
 	@Cascade(org.hibernate.annotations.CascadeType.ALL)
 	private List<RequestHeadersTbl> req_headers;
 	
-	@OneToMany
+	@OneToMany(mappedBy="apiClusterTbl")
 	@Column(name="PATH_VARIABLES_TBL")
 	@Cascade(org.hibernate.annotations.CascadeType.ALL)
 	private List<PathVariablesTbl> pathVariables;
 	
-	@OneToMany
+	@OneToMany(mappedBy="apiClusterTbl")
 	@Column(name="QUERY_PARAM_TBL")
 	@Cascade(org.hibernate.annotations.CascadeType.ALL)
 	private List<QueryParamsTbl> queryParams;
 	
-	@OneToMany
+	@OneToMany(mappedBy="apiId")
 	@Column(name="HEADERS_Tbl")
 	@Cascade(org.hibernate.annotations.CascadeType.ALL)
 	private List<RespnseHeadersTbl> res_headers;
@@ -55,9 +53,10 @@ public class APIClusterTbl implements Serializable {
 	@Column(name="REQUEST_BODY")
 	private String requestBody;
 	
-	@Lob
+	@OneToMany(mappedBy="apiId")
 	@Column(name="RESPONSE_BODY")
-	private String responseBody;
+	@Cascade(org.hibernate.annotations.CascadeType.ALL)
+	private List<ResponseBodyTbl> responseBody;
 	
 	@Lob
 	@Column(name="DESCRIPTION")
@@ -136,11 +135,11 @@ public class APIClusterTbl implements Serializable {
 		this.requestBody = requestBody;
 	}
 
-	public String getResponseBody() {
+	public List<ResponseBodyTbl> getResponseBody() {
 		return responseBody;
 	}
 
-	public void setResponseBody(String responseBody) {
+	public void setResponseBody(List<ResponseBodyTbl> responseBody) {
 		this.responseBody = responseBody;
 	}
 
