@@ -30,7 +30,7 @@ public class ResponseBodyTbl implements Serializable{
 	private String responseBody;
 	
 	@Column(name="DESCRIPTION")
-	private String description;
+	private String rbDescription;
 	
 	@ManyToOne
 	@JoinColumn(name="apiId", nullable = false)
@@ -68,12 +68,14 @@ public class ResponseBodyTbl implements Serializable{
 		this.apiId = apiId;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getRbDescription() {
+		return rbDescription;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setRbDescription(String rbDescription) {
+		this.rbDescription = rbDescription;
 	}
+
+	
 	
 }

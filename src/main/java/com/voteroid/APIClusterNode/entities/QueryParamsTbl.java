@@ -29,8 +29,11 @@ public class QueryParamsTbl implements Serializable{
 	@Column(name="QUERY_PARAM")
 	private String queryParam;
 	
+	@Column(name="TYPE")
+	private int qpType;
+	
 	@Column(name="DESCRIPTION")
-	private String description;
+	private String qpDescription;
 
 	public APIClusterTbl getApiClusterTbl() {
 		return apiClusterTbl;
@@ -48,13 +51,31 @@ public class QueryParamsTbl implements Serializable{
 		this.queryParam = queryParam;
 	}
 
-	public String getDescription() {
-		return description;
+	public int getQueryVarId() {
+		return queryVarId;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setQueryVarId(int queryVarId) {
+		this.queryVarId = queryVarId;
 	}
+
+	public int getQpType() {
+		return qpType;
+	}
+
+	public void setQpType(int qpType) {
+		this.qpType = qpType;
+	}
+
+	public String getQpDescription() {
+		return qpDescription;
+	}
+
+	public void setQpDescription(String qpDescription) {
+		this.qpDescription = qpDescription;
+	}
+
+	
 	
 	
 	

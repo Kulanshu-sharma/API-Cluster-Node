@@ -27,16 +27,16 @@ public class RequestHeadersTbl implements Serializable {
 	private APIClusterTbl apiId;
 	
 	@Column(name="HEADER_KEY")
-	private String headerKey;
+	private String reqHeaderKey;
 	
 	@Column(name="HEADER_VALUE")
-	private String headerValue;
+	private String reqHeaderValue;
 
 	@Column(name="TYPE")
-	private int type;
+	private int reqType;
 	
 	@Column(name="DESCRIPTION")
-	private String description;
+	private String reqDescription;
 	
 
 	public APIClusterTbl getApiId() {
@@ -47,38 +47,46 @@ public class RequestHeadersTbl implements Serializable {
 		this.apiId = apiId;
 	}
 
-	public String getHeaderKey() {
-		return headerKey;
+	public int getHeaderId() {
+		return headerId;
 	}
 
-	public void setHeaderKey(String headerKey) {
-		this.headerKey = headerKey;
+	public void setHeaderId(int headerId) {
+		this.headerId = headerId;
 	}
 
-	public String getHeaderValue() {
-		return headerValue;
+	public String getReqHeaderKey() {
+		return reqHeaderKey;
 	}
 
-	public void setHeaderValue(String headerValue) {
-		this.headerValue = headerValue;
+	public void setReqHeaderKey(String reqHeaderKey) {
+		this.reqHeaderKey = reqHeaderKey;
 	}
 
-	public int getType() {
-		return type;
+	public String getReqHeaderValue() {
+		return reqHeaderValue;
 	}
 
-	public void setType(int type) {
-		this.type = type;
+	public void setReqHeaderValue(String reqHeaderValue) {
+		this.reqHeaderValue = reqHeaderValue;
 	}
 
-	public String getDescription() {
-		return description;
+	public int getReqType() {
+		return reqType;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setReqType(int reqType) {
+		this.reqType = reqType;
 	}
-	
+
+	public String getReqDescription() {
+		return reqDescription;
+	}
+
+	public void setReqDescription(String reqDescription) {
+		this.reqDescription = reqDescription;
+	}
+
 	
 	
 	

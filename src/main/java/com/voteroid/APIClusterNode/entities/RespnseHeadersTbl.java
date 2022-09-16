@@ -26,16 +26,16 @@ public class RespnseHeadersTbl implements Serializable {
 	private APIClusterTbl apiId;
 	
 	@Column(name="HEADER_KEY")
-	private String headerKey;
+	private String resHeaderKey;
 	
 	@Column(name="HEADER_VALUE")
-	private String headerValue;
+	private String resHeaderValue;
 
 	@Column(name="DESCRIPTION")
-	private String description;
+	private String resDescription;
 	
 	@Column(name="TYPE")
-	private int type;
+	private int resType;
 	
 
 	public APIClusterTbl getApiId() {
@@ -46,37 +46,47 @@ public class RespnseHeadersTbl implements Serializable {
 		this.apiId = apiId;
 	}
 
-	public String getHeaderKey() {
-		return headerKey;
+	public int getHeaderId() {
+		return headerId;
 	}
 
-	public void setHeaderKey(String headerKey) {
-		this.headerKey = headerKey;
+	public void setHeaderId(int headerId) {
+		this.headerId = headerId;
 	}
 
-	public String getHeaderValue() {
-		return headerValue;
+	public String getResHeaderKey() {
+		return resHeaderKey;
 	}
 
-	public void setHeaderValue(String headerValue) {
-		this.headerValue = headerValue;
+	public void setResHeaderKey(String resHeaderKey) {
+		this.resHeaderKey = resHeaderKey;
 	}
 
-	public int getType() {
-		return type;
+	public String getResHeaderValue() {
+		return resHeaderValue;
 	}
 
-	public void setType(int type) {
-		this.type = type;
+	public void setResHeaderValue(String resHeaderValue) {
+		this.resHeaderValue = resHeaderValue;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getResDescription() {
+		return resDescription;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setResDescription(String resDescription) {
+		this.resDescription = resDescription;
 	}
+
+	public int getResType() {
+		return resType;
+	}
+
+	public void setResType(int resType) {
+		this.resType = resType;
+	}
+
+	
 	
 	
 }

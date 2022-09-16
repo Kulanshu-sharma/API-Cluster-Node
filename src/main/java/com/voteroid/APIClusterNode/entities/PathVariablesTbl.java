@@ -26,10 +26,13 @@ public class PathVariablesTbl implements Serializable {
 	private APIClusterTbl apiClusterTbl;
 	
 	@Column(name="PATH_VARIABLE")
-	private String pathVariables;
+	private String pathVariable;
+	
+	@Column(name="TYPE")
+	private int pvType;
 	
 	@Column(name="DESCRIPTION")
-	private String description;
+	private String pvDescription;
 
 	public APIClusterTbl getApiClusterTbl() {
 		return apiClusterTbl;
@@ -39,21 +42,41 @@ public class PathVariablesTbl implements Serializable {
 		this.apiClusterTbl = apiClusterTbl;
 	}
 
-	public String getPathVariables() {
-		return pathVariables;
+	public int getPathVarId() {
+		return pathVarId;
 	}
 
-	public void setPathVariables(String pathVariables) {
-		this.pathVariables = pathVariables;
+	public void setPathVarId(int pathVarId) {
+		this.pathVarId = pathVarId;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getPathVariable() {
+		return pathVariable;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setPathVariable(String pathVariable) {
+		this.pathVariable = pathVariable;
 	}
+
+	public int getPvType() {
+		return pvType;
+	}
+
+	public void setPvType(int pvType) {
+		this.pvType = pvType;
+	}
+
+	public String getPvDescription() {
+		return pvDescription;
+	}
+
+	public void setPvDescription(String pvDescription) {
+		this.pvDescription = pvDescription;
+	}
+
+	
+
+	
 	
 	
 }

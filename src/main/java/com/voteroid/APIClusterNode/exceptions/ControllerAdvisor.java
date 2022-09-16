@@ -63,7 +63,7 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 	}
 	@ExceptionHandler(UserAuthenticationFailed.class)
 	public ResponseEntity<Object> handleNoAPIMethodNameRecieved(UserAuthenticationFailed ex) {
-		ExceptionFieldsDTO body = new ExceptionFieldsDTO(LocalDateTime.now(),Messages.Exceptions.AUTHENTICATION_FAILED);
+		ExceptionFieldsDTO body = new ExceptionFieldsDTO(LocalDateTime.now(),ex.getMessage());
         return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
 	}
 }

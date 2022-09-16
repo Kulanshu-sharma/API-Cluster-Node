@@ -51,6 +51,9 @@ public class APIClusterController {
 	@PostMapping("/apiCluster/registerApi")
 	public Reply saveAPIDetails(@RequestHeader(Constants.TOKEN_DATA) String data,@RequestBody APIClusterTbl clusterTbl) {
 		Reply reply = new Reply(data);
+		if(reply.getAttribute(Constants.CLIENT_ID)==null)
+			throw new UserAuthenticationFailed("No Client Id Recieved for Authentication!!!");
+		
 		LOGGER.info("API Registration in API Cluster Microservice called");
 		if(clusterTbl.getMethodName()==null || clusterTbl.getMethodName().isEmpty())
 			throw new DataNotRecieved("API Method",Constants.FieldConstants.API_METHOD,"String");
@@ -58,8 +61,8 @@ public class APIClusterController {
 		    throw new DataNotRecieved("API Path",Constants.FieldConstants.API_PATH,"String");
 		if(clusterTbl.getApiURL()==null || clusterTbl.getApiURL().isEmpty())
 			throw new DataNotRecieved("API URL",Constants.FieldConstants.API_URL,"String");
-		if(reply.getAttribute(Constants.CLIENT_ID)==null)
-			throw new UserAuthenticationFailed();
+		if(clusterTbl.getDescription()==null || clusterTbl.getDescription().isEmpty())
+			throw new DataNotRecieved("API Description",Constants.FieldConstants.API_DESCRIPTION,"String");
 		//******************** Fetching API ID from client macro service call ***************
 		int clientId = Integer.parseInt(reply.getAttribute(Constants.CLIENT_ID)+"");
 		int apiIdTemp = clientProxy.fetchNextApiNumber(clientId);   
